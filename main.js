@@ -82,17 +82,18 @@ function game(){
         switch(result){
             case "You Win!":
             playerScore++;
-            document.getElementById("playerScore").innerHTML = playerScore;
+            document.getElementById("playerScoreDisplay").textContent = playerScore;
+            
             break;
 
             case "You Lose!":
             computerScore++;
-            document.getElementById("playerScore").innerHTML = computerScore;
+            document.getElementById("computerScoreDisplay").innerHTML = computerScore;
             break;
 
             case "You Tie!":
             tieScore++;
-            document.getElementById("playerScore").innerHTML = tieScore;
+            document.getElementById("tieScoreDisplay").innerHTML = tieScore;
             break;
         }
         console.log(`Score is ${playerScore} - ${computerScore} - ${tieScore}`);
