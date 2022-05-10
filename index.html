@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
     <meta charset="UTF-8">
@@ -17,16 +20,28 @@
         </div>
         <div class="main">
             <div class="container">
-                <p>Rock</p>
-                <img src="" />
+                <p id="rock">Rock</p>
+
             </div>
             <div class="container">
-                <p>Paper</p>
+                <p id="paper">Paper</p>
             </div>
             <div class="container">
-                <p>Scissors</p>
+                <p id="scissors">Scissors</p>
             </div>
         </div>
+        <div class="playArea">
+            <div class="container" >
+                <p id="player">Unknown</p>
+            </div>
+            <div class="container">
+                <p>VS</p>
+            </div>
+            <div class="container" >
+                <p id="computer">Unknown</p>
+            </div>
+        </div>
+        <div class="container"><p id="roundStatus"></p></div>
         <div class="score">
             <div class="container">
                 <p id="playerScoreDisplay">0</p>
@@ -47,4 +62,5 @@
 
 
     </body>
+    <footer><a href="https://www.flaticon.com/free-icons/rock-paper-scissors" title="rock paper scissors icons">Rock paper scissors icons created by Freepik - Flaticon</a></footer>
 </html>
