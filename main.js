@@ -83,15 +83,12 @@ function game(){
     gameStatus = 1;
 
     document.getElementById("paper").innerHTML = "<a href=\"javascript:playerSelect('paper');\"><img src=\"images/paper.png\" /></a>";
-
     document.getElementById("rock").innerHTML = "<a href=\"javascript:playerSelect('rock');\"><img src=\"images/rock.png\" /></a>";
-
     document.getElementById("scissors").innerHTML = "<a href=\"javascript:playerSelect('scissors');\"><img src=\"images/scissors.png\" /></a>";
-  
     document.getElementById("playerScoreDisplay").innerHTML = playerScore;
     document.getElementById("computerScoreDisplay").innerHTML = computerScore;
     document.getElementById("tieScoreDisplay").innerHTML = tieScore;
-
+    document.getElementById("title").innerHTML = "Choose your weapon";
 }
 
 //Check if either player score or computer score has reached 5
@@ -116,7 +113,7 @@ function playerSelect(choice){
     const playerSelection = choice;
 
     //Display computer and player selections
-    const playerSelectionImage = `<img src=\"images/${playerSelection}.png\" /><br />${playerSelection}`;
+    const playerSelectionImage = `<img src=\"images/${playerSelection}.png\" />`;
     const computerSelectionImage = `<img src=\"images/${computerSelection}.png\" />`;
     console.log(playerSelectionImage);
 
@@ -147,11 +144,11 @@ function playerSelect(choice){
     //Check if the game is over and display winner if it is
     let status = gameOver();
     if (status == 1){
-        alert("Game over you win");
+        document.getElementById("title").innerHTML = "Humans Win!";
         gameStatus = 0;
     }
     else if (status == 2){
-        alert("Game over you lose *wump womp*");
+        document.getElementById("title").innerHTML = "Computers Win :(";
         gameStatus = 0;
     }
 
