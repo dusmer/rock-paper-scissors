@@ -5,67 +5,58 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <meta charset="UTF-8">
     <title>Rock Paper Scissors</title>
 
-    </head>
-    <body>
-        <div class="header">
-            <h1>Rock, Paper, Scissors</h1>
+</head>
+<body>
+    <div class="head">
+        <h1>Rock, Paper, Scissors</h1>
+    </div>
+    <div class="intro">
+        <div class="row">
+            <p>Do you dare challenge the smartest computer in the world?</p>
         </div>
-        <div class="info">
-            <p>First to 5 wins. Would you like to play?</p>
-            <a href="javascript:game();" id="startGame">Start Game</a>
+        <div class="row">
+            <button id="start" onclick="game();">Start</button>
         </div>
-        <div class="main">
-            <div class="mainTitle">
-                <p id="title">Who will win?</p>
-            </div>
-            <div class="selection">
-                <div class="container">
-                    <p id="rock"></p>
 
-                </div>
-                <div class="container">
-                    <p id="paper"></p>
-                </div>
-                <div class="container">
-                    <p id="scissors"></p>
-                </div>
+    </div>
+    <div class="main">
+        <div class="container">
+
+
+            <div class="playerSelector">
+                <button class="playerSelect" id="Rock" ><img src="images/Rock.png" /></button>
+                <button class="playerSelect" id="Paper"><img src="images/Paper.png" /></button>
+                <button class="playerSelect" id="Scissors"><img src="images/Scissors.png" /></button>
             </div>
+
+
         </div>
-        <div class="playArea">
-            <div class="container" >
-                <p id="player">Unknown</p>
+        <div class="battleGround">
+            <div class="playerContainer"><img class="imgItem" id="playerAction" src="images/Question.png" /></div>
+            <div id="vs">
+                vs
             </div>
-            <div class="container">
-                <p>VS</p>
-            </div>
-            <div class="container" >
-                <p id="computer">Unknown</p>
-            </div>
+            <div id="computerSelection"><img class="imgItem" id="computerAction" src="images/Question.png" /></div>
         </div>
-        <div class="container"><p id="roundStatus"></p></div>
+        <div class="result">
+
+        </div>
         <div class="score">
-            <div class="container">
-                <p id="playerScoreDisplay">0</p>
+            <div class="subContainer" id="playerScoreDisplay">
+                0
             </div>
-            <div class="container">
-                <p>-</p>
+            <div class="subContainer">
+                to
             </div>
-            <div class="container">
-                <p id="computerScoreDisplay">0</p>
-            </div>
-            <div class="container">
-                <p>-</p>
-            </div>
-            <div class="container">
-                <p id="tieScoreDisplay">0</p>
+            <div class="subContainer" id="computerScoreDisplay">
+                0
             </div>
         </div>
-
-
-    </body>
-    <footer><a href="https://www.flaticon.com/free-icons/rock-paper-scissors" title="rock paper scissors icons">Rock paper scissors icons created by Freepik - Flaticon</a></footer>
+        <div class="endGame"></div>
+    </div>
+</body>
 </html>
