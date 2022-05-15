@@ -1,156 +1,113 @@
-//Gloabl score keeping varibles
+let scorePlayer = 0;
+let scoreComputer = 0;
+let buttons = document.querySelectorAll('.playerSelect');
 
-let playerScore = 0;
-let computerScore = 0;
-let tieScore = 0;
-let gameStatus = 0
+const playerScoreDisplay = document.querySelector('#playerScoreDisplay');
+const computerScoreDisplay = document.querySelector('#computerScoreDisplay');
+const container = document.querySelector('.container');
+const endGame = document.querySelector('.endGame');
+const playerAction = document.querySelector('#playerAction');
+const computerAction = document.querySelector('#computerAction');
+const result = document.querySelector('.result');
 
-//Use a random number generator to pick and return a random option from the array
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const roundStatus = playRound(button.id, computerPlay());
+        switch (roundStatus){
+            case "You Win":
+                scorePlayer++;
+                break;
+            case "You Lose":
+                scoreComputer++;
+                break;
+        }
+        result.textContent=`This round: ${roundStatus}`;
+        playerScoreDisplay.textContent =scorePlayer;
+        computerScoreDisplay.textContent =scoreComputer;
+        gameStatus();
+ 
+    });
+})
+
+//return random rock, paper or scissors
 function computerPlay(){
-
-    const options = ["rock", "paper", "scissors"];
-    let compPlay = options[Math.floor(Math.random()*options.length)];
+    const options = ["Rock", "Paper", "Scissors"];
+    const compPlay = options[Math.floor(Math.random()*options.length)];
     return compPlay;
 }
 
-//Determine a winner based on the player and computer selection
-function playRound(playerSelection,computerSelection){
+//return a string that declares the winner
+function playRound(playerSelection, computerSelection){
+    playerAction.setAttribute('src', `images/${playerSelection}.png`);
+    computerAction.setAttribute('src', `images/${computerSelection}.png`);
 
-    if (playerSelection.toLowerCase() == "rock"){
-        switch(computerSelection){
-            case "rock":
-            return "You Tie!";
-            break;
+  
+    if (playerSelection == "Rock"){
+        switch (computerSelection){
+            case "Rock":
+                return "Tie";
+                break;
 
-            case "paper":
-            return "You Lose!";
-            break;
+            case "Paper":
+                return "You Lose";
+                break;
 
-            case "scissors":
-            return "You Win!";
-            break;
+            case "Scissors":
+                return "You Win";
+                break;
         }
-    }
-    else if (playerSelection.toLowerCase() == "paper"){
-        switch(computerSelection){
-            case "rock":
-            return "You Win!";
-            break;
+    }else if (playerSelection == "Paper"){
+        switch (computerSelection){
+            case "Rock":
+                return "You Win";
+                break;
 
-            case "paper":
-            return "You Tie!";
-            break;
+            case "Paper":
+                return "Tie";
+                break;
 
-            case "scissors":
-            return "You Lose!";
-            break;
+            case "Scissors":
+                return "You Lose";
+                break;
         }
-    }
-    else if (playerSelection.toLowerCase() == "scissors"){
-        switch(computerSelection){
-            case "rock":
-            return "You Lose!";
-            break;
+    }else if (playerSelection == "Scissors"){
+        switch (computerSelection){
+            case "Rock":
+                return "You Lose";
+                break;
 
-            case "paper":
-            return "You Win!";
-            break;
+            case "Paper":
+                return "You Win";
+                break;
 
-            case "scissors":
-            return "You Tie!";
-            break;
+            case "Scissors":
+                return "Tie";
+                break;
         }
-    }else{
-        return 0;
     }
 }
 
-
-
-function playGame(playerSelection){
-    const computerSelection = computerPlay();
-    const result = playRound(playerSelection,computerSelection);
-    console.log(`Player:${playerSelection} \n Computer: ${computerSelection}`)
-    console.log(result);
-
-}
-
-//Calling game() restarts the game, and sets the scores to 0
 function game(){
-    playerScore = 0;
-    computerScore = 0;
-    tieScore = 0;
-    gameStatus = 1;
+    scorePlayer = 0;
+    scoreComputer = 0;
 
-    document.getElementById("paper").innerHTML = "<a href=\"javascript:playerSelect('paper');\"><img src=\"images/paper.png\" /></a>";
-    document.getElementById("rock").innerHTML = "<a href=\"javascript:playerSelect('rock');\"><img src=\"images/rock.png\" /></a>";
-    document.getElementById("scissors").innerHTML = "<a href=\"javascript:playerSelect('scissors');\"><img src=\"images/scissors.png\" /></a>";
-    document.getElementById("playerScoreDisplay").innerHTML = playerScore;
-    document.getElementById("computerScoreDisplay").innerHTML = computerScore;
-    document.getElementById("tieScoreDisplay").innerHTML = tieScore;
-    document.getElementById("title").innerHTML = "Choose your weapon";
+    playerScoreDisplay.textContent =scorePlayer;
+    computerScoreDisplay.textContent =scoreComputer;
+
+    container.setAttribute('style', 'display: flex;');
+    endGame.setAttribute('style', 'display: none;');
 }
 
-//Check if either player score or computer score has reached 5
-function gameOver(){
-    if (playerScore == 5 || computerScore == 5){
-        document.getElementById("paper").innerHTML = "Paper";
-        document.getElementById("rock").innerHTML = "Rock";
-        document.getElementById("scissors").innerHTML = "Scissors";
-        
-        return (playerScore == 5 ? 1 : 2)
-
-    }
-    else{
-        return 0;
-    }
-}
-
-function playerSelect(choice){
-
-
-    const computerSelection = computerPlay();
-    const playerSelection = choice;
-
-    //Display computer and player selections
-    const playerSelectionImage = `<img src=\"images/${playerSelection}.png\" />`;
-    const computerSelectionImage = `<img src=\"images/${computerSelection}.png\" />`;
-    console.log(playerSelectionImage);
-
-    
-    document.getElementById("player").innerHTML = playerSelectionImage;
-    document.getElementById("computer").innerHTML = computerSelectionImage;
-    
-    //Get round winner based on selections and display winner message
-    const result = playRound(playerSelection,computerSelection);
-    document.getElementById("roundStatus").innerHTML = result;
-    switch(result){
-        case "You Win!":
-        playerScore++;
-        document.getElementById("playerScoreDisplay").innerHTML = playerScore;
-        break;
-
-        case "You Lose!":
-        computerScore++;
-        document.getElementById("computerScoreDisplay").innerHTML = computerScore;
-        break;
-
-        case "You Tie!":
-        tieScore++;
-        document.getElementById("tieScoreDisplay").innerHTML = tieScore;
-        break;
-    }
-
-    //Check if the game is over and display winner if it is
-    let status = gameOver();
-    if (status == 1){
-        document.getElementById("title").innerHTML = "Humans Win!";
-        gameStatus = 0;
-    }
-    else if (status == 2){
-        document.getElementById("title").innerHTML = "Computers Win :(";
-        gameStatus = 0;
-    }
-
+//start game and play 5 rouds
+function gameStatus(){
+    if (scorePlayer >= 5){
+        container.setAttribute('style', 'display: none;');
+        endGame.setAttribute('style', 'display: flex;');
+        endGame.textContent = "Game Over: You Win";
+    }else if (scoreComputer >= 5){
+        container.setAttribute('style', 'display: none;');
+        endGame.setAttribute('style', 'display: flex;');
+        endGame.textContent = "Game Over: You Lose";
+    } 
 
 }
